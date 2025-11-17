@@ -1,9 +1,20 @@
 ---
 import PlateCard from "./PlateCard.astro";
 const { section } = Astro.props;
+import { obtenerProductos } from "../lib/api.js";
+
+const productos = await obtenerProductos();
 ---
 
 <h1 class="tittle-menu-section">{section}</h1>
 <div class="plate-cards-container">
-    <PlateCard name="Nigiri salmon" amount="3" img="/src/assets/img/sushi.webp"/>
+    {
+        productos.map((p: any) => (
+            <PlateCard
+                name={p.nombre}
+                amount={p.cantidad ?? 1}
+                img="/src/assets/img/sushi.webp"
+            />
+        ))
+    }
 </div>
