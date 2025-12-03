@@ -14,7 +14,7 @@ const productos = await obtenerProductos();
         <PlateCard
           name={p.nombre}
           amount={p.cantidad ?? 1}
-          img="/src/assets/img/sushi.webp"
+        img={p.url_imagen ? `http://localhost:3000${p.url_imagen}` : "/src/assets/img/sushi.webp"}
           producto={p}
         />
       ))

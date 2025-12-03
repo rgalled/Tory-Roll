@@ -2,7 +2,6 @@ import { useEffect, useState } from "preact/hooks";
 import { carritoGlobal } from "../../lib/cart";
 import { socket } from "../../lib/socket";
 
-// Eliminar item (NO es isla, es un componente normal)
 function RemoveItem({ id }) {
   function remove() {
     carritoGlobal.eliminarProducto(id);
@@ -43,7 +42,16 @@ export default function CartIsland() {
     <>
       {items.map((item) => (
         <div class="object">
-          <div class="object-img"></div>
+          <div 
+            class="object-img" 
+            style={{
+              backgroundImage: item.url_imagen 
+                ? `url(http://localhost:3000${item.url_imagen})` 
+                : 'url(/src/assets/img/sushi.webp)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center'
+            }}
+          ></div>
           <div class="object-content">
             <div class="object-text">
               <h3 class="object-title">{item.nombre}</h3>
