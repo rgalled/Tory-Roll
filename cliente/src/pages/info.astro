@@ -1,0 +1,53 @@
+---
+import Header from "../components/Header.astro";
+import PlateCard from "../components/PlateCard.astro";
+import Cart from "../components/Cart.astro";
+import { obtenerProductos } from "../lib/api.js";
+import "../assets/css/style.css";
+import OptionLeftNav from "../components/OptionLeftNav.astro";
+import MenuSection from "../components/MenuSection.astro";
+import ClientOrderGestor from "../components/ClientOrderGestor.astro";
+import ProductDesc from "../components/ProductDesc.astro";
+const productos = await obtenerProductos();
+---
+
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Tori & Roll</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+            crossorigin="anonymous"
+        />
+    </head>
+
+    <body>
+        <Header />
+
+        <div class="info-container">
+            <div class="info-img">
+                <a href="/" class="button-back"></a>
+            </div>
+            <div class="info-content">
+                <h1 class="info-title">Texto de prueba</h1>
+                <div class="info-context-text">
+                    <p>
+                        APSDJOA ISHDO AISHFOSAHF hasufh dsiuohfaiusd hfsdiu
+                        hfiuasdf df adsf iasdbyuf igdsyaugfyua sdgfu yasdgyuf gy
+                        adsgfadsyu gfasduy gfuydsa gif fibsadoiy gfdsay gfyus
+                        dafbhasdbvjhbshj iuif dsuif gusdads uidsa ufi sf
+                        poihasduifh uaodsh fuioasdh uihsad foasdg gadsyu fadsof
+                        gbsiud po suadhuf ioah dsuifhasduio giuads giasdg uidsg
+                        iuas 
+                    </p>
+                    <p><span>Precio :</span> 0000</p>
+                    <p><span>Cantidad :</span> 4</p>
+
+                    <div class="alergies"></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
