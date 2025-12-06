@@ -10,7 +10,7 @@ export default function TablaProductos() {
 
   useEffect(() => {
     cargarProductos();
-    
+
     window.recargarProductosGlobal = cargarProductos;
   }, []);
 
@@ -52,7 +52,8 @@ export default function TablaProductos() {
             <th>Precio</th>
             <th>Alergenos</th>
             <th>Descripción</th>
-            <th>Acciones</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
           </tr>
         </thead>
 
@@ -68,8 +69,8 @@ export default function TablaProductos() {
               <tr key={producto.id}>
                 <td>
                   {producto.url_imagen ? (
-                    <img 
-                      src={`${API_URL}${producto.url_imagen}`} 
+                    <img
+                      src={`${API_URL}${producto.url_imagen}`}
                       alt={producto.nombre}
                       style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '5px' }}
                     />
@@ -88,8 +89,10 @@ export default function TablaProductos() {
                     : 'Ninguno'}
                 </td>
                 <td>{producto.descripcion || '-'}</td>
-                <td class="acciones">
+                <td>
                   <BotonEditar producto={producto} />
+                </td>
+                <td>
                   <BotonEliminar producto={producto} onEliminar={cargarProductos} />
                 </td>
               </tr>

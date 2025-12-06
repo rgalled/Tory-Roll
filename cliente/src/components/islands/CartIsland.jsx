@@ -54,7 +54,7 @@ export default function CartIsland() {
           ></div>
           <div class="object-content">
             <div class="object-text">
-              <h3 class="object-title">{item.nombre}</h3>
+              <h1 class="object-title">{item.nombre}</h1>
               <h4 class="object-ammount">
                 cantidad: <span>{item.cantidad}</span>
               </h4>

@@ -178,11 +178,36 @@ header {
                             flex-flow: row nowrap;
                             justify-content: center;
                             align-items: center;
-                            border: 4px solid transparent;
-                            border-image: linear-gradient(90deg, rgba(255, 120, 30, 1), rgba(255, 225, 31, 1)) 1;
-                            color: #FF781E;
-                            padding: 0px 11px;
+                            position: relative;
+                            /* necesario para el pseudo-elemento */
+                            padding: 6px 16px;
+                            /* ajusta a tu gusto */
                             border-radius: 20px;
+                            color: #FF781E;
+                            background: white;
+                            /* fondo del botón */
+                            font-weight: bold;
+                            z-index: 1;
+                        }
+
+                        /* Pseudo-elemento para el borde degradado */
+                        .info::before {
+                            content: "";
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            border-radius: 20px;
+                            padding: 4px;
+                            /* grosor del borde */
+                            background: linear-gradient(90deg, rgba(255, 120, 30, 1), rgba(255, 225, 31, 1));
+                            -webkit-mask:
+                                linear-gradient(#fff 0 0) content-box,
+                                linear-gradient(#fff 0 0);
+                            -webkit-mask-composite: destination-out;
+                            mask-composite: exclude;
+                            z-index: -1;
                         }
                     }
                 }
@@ -191,7 +216,8 @@ header {
     }
 }
 
-.cross {
+.cross,
+.cross-cart {
     width: 50px;
     height: 50px;
     cursor: pointer;
@@ -216,6 +242,11 @@ header {
     }
 }
 
+.cross-cart {
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
 .Carrito {
     top: 110px;
     right: 0;
@@ -229,7 +260,7 @@ header {
     gap: 20px;
     overflow-y: auto;
     overflow-x: hidden;
-
+    z-index: 100;
 
     .Carrito-header {
         width: 100%;
@@ -280,7 +311,7 @@ header {
 
                 .object-delete {
                     text-decoration: none;
-                    color: black;
+                    color: orange;
                     padding: 10px 15px;
                     border: none;
                     border-radius: 20px;
@@ -389,7 +420,8 @@ header {
 }
 
 .form-product {
-    width: 450px;
+    width: 95%;
+    max-width: 1500px;
     background: white;
     border-radius: 20px;
     padding: 2rem;
@@ -405,9 +437,17 @@ header {
     text-align: center;
     font-size: 2rem;
     color: #353535;
+    margin: 0;
+}
+
+.form-product form {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
 }
 
 .dropzone {
+    grid-column: span 3;
     border: 2px dashed #ccc;
     border-radius: 20px;
     padding: 2rem;
@@ -422,9 +462,16 @@ header {
     background: #FFF3E0;
 }
 
-.dropzone i {
-    font-size: 3rem;
-    color: #FF781E;
+.dropzone img {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 12px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 .form-group label {
@@ -440,10 +487,9 @@ header {
     padding: 12px;
     border-radius: 12px;
     border: 1px solid #ccc;
-    outline: none;
     background-color: white;
     font-size: 1rem;
-    transition: 0.2s;
+    box-sizing: border-box;
 }
 
 .form-group input:focus,
@@ -455,17 +501,29 @@ header {
 textarea {
     min-height: 90px;
     resize: none;
+    grid-column: span 3;
 }
 
 .alerg-container {
+    max-height: 200px;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
 
 .alerg-container label {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
     cursor: pointer;
     font-size: 0.95rem;
+}
+
+.alerg-container input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin: 0;
 }
 
 .btn-save {
@@ -484,6 +542,24 @@ textarea {
 .btn-save:hover {
     filter: brightness(1.1);
 }
+
+.btn-cancel {
+    padding: 15px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.1rem;
+    background: #ddd;
+    transition: 0.3s;
+}
+
+form>div:last-child {
+    grid-column: span 3;
+    display: flex;
+    gap: 10px;
+}
+
 
 .table-container {
     width: 95%;
@@ -645,13 +721,14 @@ footer {
 .ClientOrderGestor {
     width: 85%;
     height: 90%;
-    background-color: #d1b1e7;
+    background-color: #e7e7b1;
     position: fixed;
     top: 110px;
     right: 0;
     overflow-y: auto;
     overflow-x: hidden;
     display: none;
+    z-index: 101;
 
     .ClientOrderContainer {
         padding: 2rem;
@@ -659,10 +736,18 @@ footer {
         .ClientOrder {
             table {
                 margin-left: 3rem;
+                display: table;
+                border-collapse: separate;
+                box-sizing: border-box;
+                text-indent: initial;
+                unicode-bidi: isolate;
+                border-spacing: 2px;
+                border-color: gray;
             }
         }
     }
 }
+
 .info-container {
     width: 100%;
     height: 100vh;
@@ -761,7 +846,7 @@ footer {
             position: absolute;
             bottom: 40px;
             right: 40px;
-            
+
             i {
                 width: 40px;
                 height: 40px;
@@ -782,4 +867,14 @@ footer {
             }
         }
     }
+}
+
+
+.info:hover,
+.order:hover,
+.info:hover,
+.button-cart:hover,
+footer:hover,
+.selector:hover {
+    transform: scale(1.05);
 }
